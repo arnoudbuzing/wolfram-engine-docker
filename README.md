@@ -1,10 +1,28 @@
-# wolfram-engine-docker
+# Wolfram Engine for Docker
 
 ## Summary
 
-This Dockerfile creates a Docker image configured to run the Wolfram Engine conveniently on your machine. It downloads and installs the official Wolfram Engine (for Linux) from Wolfram Research. After the image is created you will need to run it once to activate it with your Wolfram ID and password that you used to sign up for your Free Wolfram Engine for Developer license. This creates a password file which you can copy to your host machine and use for subsequent launches of the Wolfram Engine.
+The Wolfram Engine for Docker allows you to run the Wolfram Language in an interactive REPL (Read-Evaluate-Print-Loop). 
 
-## Details of installation and configuration
+The first part of the instructions below show how you can use the Dockerfile (from https://github.com/arnoudbuzing/wolfram-engine-docker) to create a Docker image configured to run the Wolfram Engine conveniently on your machine. It downloads and installs the official Wolfram Engine (for Linux) from Wolfram Research. After the image is created you will need to run it once to activate it with your Wolfram ID and password that you used to sign up for your Free Wolfram Engine for Developer license. This creates a password file which you can copy to your host machine and use for subsequent launches of the Wolfram Engine.
+
+The second part of the instructions show how you can get a prebuilt Wolfram Engine docker image directly from https://hub.docker.com/r/arnoudbuzing/wolframengine and run it locally on your machine.
+
+The Wolfram Engine gives you full access to the Wolfram Language. See:
+
+* https://www.wolfram.com/language, for an overview of the Wolfram Language
+* https://www.wolfram.com/language/fast-introduction-for-programmers/en/, for a getting started tutorial
+* https://reference.wolfram.com, for full reference documentation of the Wolfram Language
+
+Please note that the Free Wolfram Engine for Developer is licensed software, subject to the Terms of Use listed here:
+* http://www.wolfram.com/legal/terms/wolfram-engine.html
+
+To use the Wolfram Engine you will need to sign up for a (free) developer license, which can be obtained here:
+* https://www.wolfram.com/developer-license
+
+The developer license requires the creation of a Wolfram ID and acceptance of the Terms of Use.
+
+## Creating a Wolfram Engine docker image, using the Dockerfile
 
 ### 1. Clone this repository
 
@@ -38,7 +56,19 @@ docker build -t yourname/wolframengine:1.0 .
 
 At this point Docker will configure a base Ubuntu image with various packages required by the Wolfram Engine. It will also download a copy of the Wolfram Engine from the Wolfram Research web site, and install it. This whole process may take 5-10 minutes to complete.
 
-### 3. Run the Docker image to activate the Wolfram Engine
+## Using the prebuilt Wolfram Engine docker image
+
+Instead of building the Wolfram Engine using the Dockerfile you can also download a prebuilt Wolfram Engine docker image directly from https://hub.docker.com/r/arnoudbuzing/wolframengine. In a command line issue the following command:
+
+```
+> docker pull arnoudbuzing/wolframengine
+```
+
+## Activating and running the Wolfram Engine
+
+The following steps are required whether you built the Wolfram Engine docker image yourself or using the prebuilt Wolfram Engine docker image from Docker Hub.
+
+### 1. Run the Docker image to activate the Wolfram Engine
 
 Visit https://wolfram.com/developer-license first to get a license for the Free Wolfram Engine for Developers. You will be asked to sign up for a Wolfram ID and to accept the terms of use.
 
@@ -99,3 +129,6 @@ Out[2]= 12.0.0 for Linux x86 (64-bit) (May 19, 2019)
 ```
 
 Note that the password for the Free Wolfram Engine for Developer has an expiration date. When the actual date is close to the expiration date, the Wolfram Engine will automatically re-activate itself. However, you will need to copy the newer password from the `$PasswordFile` again to the hostmachine `mathpass` file (basically repeating step 3 and 4 above).
+
+Also note that activating a Wolfram Engine docker image uses up one of the two activation keys that were assigned to you when you signed up for the Free Wolfram Engine for Developer license.
+
